@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<main class="shadow-lg p-3 mb-5 mt-5 bg-body-tertiary rounded border border-primary" id="form-dni">
+    <form class="row g-3 " method="POST" action="#">
+        {% csrf_token %}
+        <div class="col-md text-center">
+            <video id="qr-video" playsinline autoplay width="300" height="250"></video>
+        </div>
+        <div class="col-md-4 text-center">
+            <img id="foto" name="foto" src="{% static 'assets/th.webp' %}" alt=""
+                    styel="width:100px; height:400px;">
+        </div>
+        <div class="col-md-4 ">
+            <label for="dni" class="form-label">Documento</label>
+            {{form1.dni}}
+            <label for="nombre" class="form-label">Nombre</label>
+            {{form1.nombre}}
+            <label for="apellidos" class="form-label">Apellidos</label>
+            {{form1.apellidos}}
+        </div>
+        
+        <div class="col-md-4">
+            <label for="turno" class="form-label">Turno</label>
+            {{form1.turno}}
+            <label for="area" class="form-label">Area</label>
+            {{form1.area}}
+        </div>
+        <div class="col-md-5">
+            <label for="observacion" class="form-label">Observacion</label>
+            {{form1.observacion}}
+            
+        </div>
+        <div class="col-md-3">
+            <button class="btn btn-primary col-md-10 mt-4 " type="submit">Registrar Asistencia</button>
+        </div>
+       
+    </form>
+    <script src="{% static 'js/lectorqr.js' %}"></script>
+    <script src="{% static 'js/completar.js' %}"></script>
+    <form action="/registrar_visita/" method="POST">
+        {% csrf_token %}
+        <div class="row g-3">
+            <div class="col-md-3">
+                <label for="dni" class="form-label">Documento</label>
+                {{form2.dni}}
+            </div>
+            <div class="col-md-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                {{form2.nombre}}
+            </div>
+            <div class="col-md-3">
+                <label for="apellido" class="form-label">Apellido</label>
+                {{form2.apellidos}}
+            </div>
+            <div class="col-md-3">
+                
+                <button class="btn btn-success mt-4" type="submit">Registrar Visita</button>
+            </div>
+        </div>
+    </form>
+
+</main>
+
+
+{% endblock content %}

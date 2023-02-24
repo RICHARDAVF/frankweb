@@ -1,0 +1,121 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <title>Friagro</title>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS v5.2.1 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'css/style.css'%}">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/jsqr/dist/jsQR.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.16.9/dist/xlsx.full.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+
+</head>
+
+<body>
+  <header>
+    <!-- place navbar here -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-info ">
+      <div class="container-fluid">
+        <img class="rounded-pill " src="{% static 'assets/logo1-default.png' %}" alt="Friagro" style="width: 150px;">
+
+
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+
+        
+
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'empleados' %}">Empleados</a>
+            </li>
+
+            {% if user.is_authenticated %}
+            {% if user.is_superuser %}
+            
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'administrador' %}">Administrador</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'controler' %}">Controler</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'vigilancia' %}">Vigilancia</a>
+            </li>
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'controler' %}">Controler</a>
+            </li>
+
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'vigilancia' %}">Vigilancia</a>
+            </li>
+
+
+            <li class="nav-item">
+              <a class="nav-link" href="#">Empleados</a>
+            </li>
+            {% endif %}
+           
+
+            <li class="nav-item">
+
+              <a class="nav-link" href="{% url 'logout' %}">Salir</a>
+            </li class="nav-item">
+            
+            {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Inicias Sesion</a>
+            </li class="nav-item">
+            
+            
+            {% endif %}
+
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <button onclick="history.back()" style="width: 60px;">
+      <i class="fas fa-caret-left" ></i>
+    </button>
+  </header>
+  <div class="container-cont m-5">
+    {% block content %}
+
+    {% endblock content %}
+  </div>
+  <footer>
+    <!-- place footer here -->
+  </footer>
+  <!-- Bootstrap JavaScript Libraries -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+    integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+    integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+    </script>
+</body>
+
+</html>

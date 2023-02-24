@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<main class="card card-body border border-primary">
+    <form action="" class="row g-3" method="POST">
+        {% csrf_token %}
+        <div class="col-md-5">
+            <label for="dni" class="form-label">Documento</label>
+            {{form.dni}}
+            <label for="nombre" class="form-label">Nombre</label>
+            {{form.nombre}}
+            <label for="apellidos" class="form-label">Apellidos</label>
+            {{form.apellidos}}
+        </div>
+        <div class="col-md-5 text-center">
+            <label for="foto" class="form-label">Foto</label>
+            <div>
+                <img src="{% static 'assets/th.webp' %}" alt="" style="width: 200px; height:200px;">
+            </div>
+        </div>
+        <div class="col-5 ">
+            <label for="contrato">Inicio de Contrato</label>
+            <input type="text" class="form-control" id="contrato"  readonly>
+        </div>
+        <div class="col-md-5">
+            <label for="condicion">Vigente</label>
+            <input type="text" class="form-control" id="condicion"  readonly>
+        </div>
+        <div class="col-md-4 text-center">
+           <button type="button" class="btn btn-success">DESCARGAR CONTRATO</button>
+        </div>
+        <div class="col-md-4 text-center">
+        
+            <button type="button" class="btn btn-success">DESCARGAR MEMORANDUM</button>
+        </div>
+        <div class="col-md-4 text-center">
+            <button type="button" class="btn btn-success">DESCARGAR BOLETA</button>
+            
+        </div>
+    
+        <div class="col-md-12">
+            <button class="btn btn-info col-md-4" data-bs-toggle="modal" data-bs-target="#myModal" type="button" >ADJUNTAR JUSTIFICACION </button>
+        </div>
+    </form>
+<script src="{% static 'js/completar.js' %}"></script>
+</main>
+<div class="modal" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5>Justificar Falta o Tardanza</h5>
+                <button class="btn btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form action="#" method="POST" enctype="multipart/form-data">
+               {% csrf_token %}
+                <div class="modal-body">
+                    DNI: <br>
+                    <input class="form-control" type="text" name="dni" id="dni" oninput="searchDNIF()" required>
+                    Nombre: <br>
+                    <input class="form-control" type="text" name="nombre" id="nombre" required>
+                    Apellido: <br>
+                    <input class="form-control" type="text" name="apellido" id="apellido" required>
+                    Fecha:
+                    <input class="form-control" type="date" name="fecha" id="fecha" required>
+                    Ajuntar Archivo: <br>
+                    <input class="form-control" type="file" name="archivo" id="archivo" required>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger" data-bs-dismiss="modal">Cerrar</button>
+                    <button class="btn btn-success" type="submit" >Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="row g-3 justify-content-between">
+    <div class="col-md-3 ">
+        <a href="/admin/" style="text-decoration:none;">
+            <div class="row g-3 bg-primary text-white">
+                <div class="col-md-6 ">
+                    <p>Panel de Administracion</p>
+                </div>
+                <div class="col-md-6 ">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="{% url 'asistencias' %}" style="text-decoration:none;">
+            <div class=" row g-3 bg-success  text-white">
+                <div class="col-md-6">
+                    <p>Asistencias</p>
+                </div>
+                <div class="col-md-6">
+                    <i class="fas fa-users"></i>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="{% url 'produccion' %}" style="text-decoration:none;">
+            <div class=" row g-3 bg-danger  text-white">
+                <div class="col-md-6">
+                    <p>Produccion</p>
+                </div>
+                <div class="col-md-6">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="col-md-3">
+        <a href="{% url 'servicio' %}" style="text-decoration:none;">
+            <div class=" row g-3 bg-dark  text-white">
+                <div class="col-md-6">
+                    <p>Servicios</p>
+                </div>
+                <div class="col-md-6">
+                    <i class="fas fa-building"></i>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
+<div class="main">
+    <div id="my-pie-chart"></div>
+    <div id="my-bar-chart"></div>
+</div>
+<script src="{% static 'js/dashboard.js' %}"></script>
+{% endblock content %}

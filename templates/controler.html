@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+
+<nav class="grid gap-3">
+    <button class="btn btn-primary" onclick="showView('vista1')"> Ingreso</button>
+    <button class="btn btn-success" onclick="showView('vista2')"> Salida</button>
+</nav>
+<div id="container-interno">
+    <div class="card card-body shadow-lg border border-primary mt-5" id="vista1">
+        <form id="formulario1" class="row g-3" action="/controler/" method="POST" class="shadow-lg border border-primary"
+            id="search-form">
+
+            {% csrf_token %}
+
+            <div class="col-md-3" id="vista1">
+                <label for="dni" class="form-label">DNI</label>
+                {{form.dni}}
+
+
+            </div>
+            <div class="col-md-3" id="vista1">
+                <label for="nombre" class="form-label">Nombre </label>
+                {{form.nombre}}
+
+            </div>
+            <div class="col-md-4" id="vista1">
+                <label for="apellido" class="form-label">Apellido</label>
+                {{form.apellido}}
+
+            </div>
+            <div class="col-md-2" id="vista1">
+                <label for="hora" class="form-label">H. de inicio</label>
+                {{form.hora_inicio}}
+            </div>
+            <div class="col-md-2" id="vista1">
+                <label for="fecha" class="form-label">Fecha</label>
+                {{form.fecha}}
+            </div>
+            <div class="col-md-2" id="vista1">
+                <label for="area" class="form-label">Area</label>
+                {{form.area}}
+            </div>
+            <div class="col-md-3" id="vista1">
+                <label for="servicio" class="form-label">Servicio</label>
+                {{form.servicio}}
+            </div>
+            <div class="col-md-4" id="vista1">
+                <label for="cliente" class="form-label">Cliente</label>
+                {{form.cliente}}
+            </div>
+            <div class="col-md-4" id="vista1">
+                <label for="producto" class="form-label">Producto</label>
+                {{form.producto}}
+            </div>
+            <div class="col-md-5" id="vista1">
+                <label for="foto" class="form-label">Foto </label>
+                <div id="vista1">
+                    <img id="foto" name="foto" src="{% static 'assets/th.webp' %}" alt=""
+                        styel="width:100px; height:400px;">
+                        
+                </div>
+            </div>
+            <div class="col-md-3" id="vista1">
+                <button type="submit" class="btn btn-info " >Registrar Entrada </button>
+            </div>
+           
+        </form>
+        <script src="{% static 'js/completar.js' %}"></script>
+    </div>
+    <div id="vista2" style="display: none;" class="card card-body shadow-lg border border-primary mt-5">
+        <form action="/registro_salida/" method="POST" class="row g-3" id="formulario2">
+            {% csrf_token %}
+            <input type="hidden" name="csrfmiddlewaretoken" id="csrf_token" value="{{ csrf_token }}">
+            <div class="col-md-4" id="vista2">
+                <label for="dni" class="form-label">DNI</label>
+                {{form.dni}}
+                <label for="turno" class="form-label">Turno</label>
+                {{form.turno}}
+                
+            </div>
+            <div class="col-md-4" id="vista2">
+                <label for="orden_produccion" class="form-label">O. Produccion</label>
+                {{form.orden_produccion}}
+                <label for="orden_servicio" class="form-label">O. Servicio</label>
+                {{form.orden_servicio}}
+            </div>
+            
+            <div class="col-md-4" id="vista2">
+                
+                <label for="lote" class="form-label">Lote</label>
+                {{form.lote}}
+                <label for="kilos" class="form-label">Kilos</label>
+                {{form.kilos}}
+            </div>
+            
+            <div class="col-md-3" id="vista2">
+                <label for="hora_salida" class="form-label">H. Salida</label>
+                {{form.hora_salida}}
+            </div>
+            <div class="col-md-12 " id="vista2">
+                
+                <label for="fotoPro" class="form-label">Foto Producto</label>
+                <img id="fotoPro" src="{% static 'assets/th.webp' %}" alt="" styel="width:100px; height:500px;">
+                
+                <label for="canvas" class="label-form">Firma</label>
+                <canvas id="canvas" onmousemove="drawOnCanvas(event)" onmousedown="startDrawing(event)"
+                    onmouseup="stopDrawing()" style="border: 1px solid black;"></canvas>
+
+                <button class="fas fa-broom" type="button" onclick="clearCanvas()"> </Button>
+            </div>
+           
+            <div class="col-10 text-center" id="vista2">
+                
+                <button  class="btn btn-warning" type="submit" onclick="saveImage()" >Registrar
+                    Salida </button>
+            </div>
+        </form>
+        <script src="{% static 'js/firmar.js' %}"></script>
+    </div>
+</div>
+<script>
+    function showView(viewId) {
+        const views = document.querySelectorAll('#container-interno div');
+        for (const view of views) {
+            view.style.display = view.id === viewId ? 'block' : 'none';
+        }
+    }  
+</script>
+
+{% endblock content %}

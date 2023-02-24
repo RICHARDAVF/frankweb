@@ -1,0 +1,28 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: "Century-Gothing",sans-serif;
+}
+.asistencia {
+    overflow: scroll;
+    height: 600px;
+}
+.produccion{
+    overflow: scroll;
+    height: 600px;
+}
+#servicios{
+    overflow: scroll;
+    height: 600px;
+}
+#clientes{
+    overflow: scroll;
+    height: 600px;
+}
+#productos{
+    overflow: scroll;
+    height: 600px;
+}

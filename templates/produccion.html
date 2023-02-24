@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<div class="row g-3">
+<div class="col-md-2 ">
+    <button class="btn btn-success col-md-12" id="export-to-excel-produccion">
+        Descargar Produccion
+       <i class="fas fa-file-excel ml-4"></i>
+    </button>
+</div>
+</div>
+<div class="produccion">
+<table class="table table-bordered table-striped" id="produccion">
+
+
+    <thead>
+      <tr class="bg-info">
+        <th scope="col"># </th>
+
+        <th scope="col">Nombres </th>
+        <th scope="col">DNI </th>
+        <th scope="col">Fecha </th>
+        <th scope="col">H-Entrada </th>
+        <th scope="col">H-Salida </th>
+        <th scope="col">Turno</th>
+        <th scope="col">Area</th>
+        <th scope="col">Serv. Realizado </th>
+        <th scope="col">OP </th>
+        <th scope="col">OS </th>
+        <th scope="col">Cliente </th>
+        <th scope="col">producto </th>
+        <th scope="col">Lote </th>
+        <th scope="col">Kilos </th>
+        <th scope="col">Firma </th>
+        <th scope="col">Acciones </th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for dato in datos %}
+      <tr>
+        <th scope="row"></th>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td>
+          <img src="#" height="50">
+        </td>
+        <td>
+          <div class="row g-2">
+            <div class="col-md-1">
+              <a href="#" class="fa fa-dollar-sign"></a>
+            </div>
+            <div class="col-md-1">
+              <a href="#"><img src="https://icon-library.com/images/warning-icon-png/warning-icon-png-19.jpg"
+                  alt="warning" style="width: 20px; height: 20px;"></a>
+            </div>
+          </div>
+          <div class="col-md-2">
+           
+              Pagado
+          
+
+          </div>
+        </td>
+
+      </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+</div>
+<div id="paginacion" class="d-flex grid gap-3 content-center"></div>
+<script>
+    var currentPage = 1;
+    var rowsPerPage = 20;
+    var table = document.getElementById("produccion");
+    var pagination = document.getElementById("paginacion");
+    var rows = table.tBodies[0].rows;
+    var totalPages = Math.ceil(rows.length / rowsPerPage);
+    var buttonsToShow = 1; // Cantidad de botones a mostrar en la paginación
+    
+    function showRows() {
+        var start = (currentPage - 1) * rowsPerPage;
+        var end = start + rowsPerPage;
+        for (var i = 0; i < rows.length; i++) {
+            if (i < start || i >= end) {
+                rows[i].style.display = "none";
+            } else {
+                rows[i].style.display = "";
+            }
+        }
+    }
+    
+    function updatePagination() {
+        var buttons = "";
+        var startButton = Math.max(1, currentPage - buttonsToShow);
+        var endButton = Math.min(totalPages, startButton + buttonsToShow * 2);
+        for (var i = startButton; i <= endButton; i++) {
+            buttons += "<button class='btn btn-primary rounded-pill ' onclick='changePage(" + i + ")'>" + i + "</button>";
+        }
+        if (currentPage < totalPages) {
+            buttons += "<button class='btn btn-primary rounded-pill ' onclick='changePage(" + (currentPage + 1) + ")'>Siguiente</button>";
+        }
+        pagination.innerHTML = buttons;
+    }
+    
+    function changePage(page) {
+        currentPage = page;
+        showRows();
+        updatePagination();
+    }
+    
+    showRows();
+    updatePagination();
+    
+
+</script>
+<script src="{% static 'js/exporproduccion.js' %}"></script>
+{% endblock content %}

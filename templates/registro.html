@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data" action="/registro/"
+  class="bg-white d-flex justify-content-center align-items-center vh-100">
+  {% csrf_token %}
+  <div class="bg-white p-5 rounded-5 text-secondary shadow" style="width: 25rem">
+    <div class="row g-3">
+
+      <div class="col md-4">
+
+        <label for="usuario" class="form-label">Nombre Usuario</label>
+
+        {{form.username}}
+
+        <label for="email" class="form-label">Correo Electronico</label>
+
+        {{form.email}}
+
+        <label for="password1" class="form-label">Contraseña</label>
+        {{form.password1}}
+        <label for="password2" class="form-label">Repita la Contraseña</label>
+        {{form.password2}}
+
+        {{form.is_staff}}
+
+
+
+
+        <button class="btn btn-primary mt-1 " type="submit">Registrar</button>
+
+
+      </div>
+    </div>
+</form>
+
+
+
+
+{% endblock content %}
